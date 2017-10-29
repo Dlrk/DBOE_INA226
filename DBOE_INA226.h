@@ -25,15 +25,9 @@
 #define DBOE_INA226_h
 #define LIBRARY_VERSION  1.0.0
 
-#if ARDUINO >= 100
- #include "Arduino.h"
- #define WIRE_WRITE Wire.write
- #define WIRE_READ Wire.read
-#else
- #include "WProgram.h"
- #define WIRE_WRITE Wire.send
- #define WIRE_READ Wire.receive
-#endif
+#include "Arduino.h"
+#define WIRE_WRITE Wire.write
+#define WIRE_READ Wire.read
 
 /*****************************************************************************************************************
 ** Declare constants used in the class                                                                          **

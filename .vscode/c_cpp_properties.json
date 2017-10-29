@@ -34,7 +34,9 @@
                 "/usr/include/newlib",
                 "/usr/include",
                 "${workspaceRoot}",
-                "/home/dave/arduino/hardware/arduino/avr/cores/arduino"
+                "/home/dave/arduino/hardware/arduino/avr/cores/arduino",
+                "/home/dave/arduino/hardware/arduino/avr/libraries/Wire/src",
+                "/home/dave/arduino/hardware/arduino/avr/libraries/SPI/src"
             ],
             "defines": [],
             "intelliSenseMode": "clang-x64",
@@ -48,7 +50,9 @@
                     "/usr/include/newlib",
                     "/usr/include",
                     "${workspaceRoot}",
-                    "/home/dave/arduino/hardware/arduino/avr/cores/arduino"
+                    "/home/dave/arduino/hardware/arduino/avr/cores/arduino",
+                    "/home/dave/arduino/hardware/arduino/avr/libraries/Wire/src",
+                    "/home/dave/arduino/hardware/arduino/avr/libraries/SPI/src"
                 ],
                 "limitSymbolsToIncludedHeaders": false,
                 "databaseFilename": ""
