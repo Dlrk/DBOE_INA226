@@ -1,29 +1,6 @@
 {
     "configurations": [
         {
-            "name": "Mac",
-            "includePath": [
-                "/usr/include",
-                "/usr/local/include",
-                "${workspaceRoot}"
-            ],
-            "defines": [],
-            "intelliSenseMode": "clang-x64",
-            "browse": {
-                "path": [
-                    "/usr/include",
-                    "/usr/local/include",
-                    "${workspaceRoot}"
-                ],
-                "limitSymbolsToIncludedHeaders": true,
-                "databaseFilename": ""
-            },
-            "macFrameworkPath": [
-                "/System/Library/Frameworks",
-                "/Library/Frameworks"
-            ]
-        },
-        {
             "name": "Linux",
             "includePath": [
                 "/usr/include/x86_64-linux-gnu/c++/5",
@@ -38,6 +15,7 @@
                 "/home/dave/arduino/hardware/arduino/avr/libraries/Wire/src",
                 "/home/dave/arduino/hardware/arduino/avr/libraries/SPI/src",
                 "/home/dave/arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include",
+                "/home/dave/arduino/hardware/arduino/avr/variants/standard",
                 "/home/dave/arduino/hardware/tools/avr/avr/include"
             ],
             "defines": [],
@@ -56,29 +34,10 @@
                     "/home/dave/arduino/hardware/arduino/avr/libraries/Wire/src",
                     "/home/dave/arduino/hardware/arduino/avr/libraries/SPI/src",
                     "/home/dave/arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include",
+                    "/home/dave/arduino/hardware/arduino/avr/variants/standard",
                     "/home/dave/arduino/hardware/tools/avr/avr/include"
                 ],
                 "limitSymbolsToIncludedHeaders": false,
-                "databaseFilename": ""
-            }
-        },
-        {
-            "name": "Win32",
-            "includePath": [
-                "C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/include",
-                "${workspaceRoot}"
-            ],
-            "defines": [
-                "_DEBUG",
-                "UNICODE"
-            ],
-            "intelliSenseMode": "msvc-x64",
-            "browse": {
-                "path": [
-                    "C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/include/*",
-                    "${workspaceRoot}"
-                ],
-                "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""
             }
         }

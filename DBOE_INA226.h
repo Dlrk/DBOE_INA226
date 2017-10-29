@@ -69,6 +69,11 @@ typedef struct {                                                               /
   uint32_t current_LSB;                                                        // Amperage LSB
   uint32_t power_LSB;                                                          // Wattage LSB
   uint8_t operatingMode;                                                       // Mode operation
+  uint16_t relay;                                                              // Relay pin for tripping on/off
+  uint32_t current;                                                            // maximum allowable current in mA
+  uint32_t microOhms;                                                          // microOhm value of shunt resistor
+  uint8_t OverloadmA;                                                          // mA maximum to trip relay  
+  boolean Overload;                                                            // In overload state True/False
 } inaSTRUCT; // of structure
 
 /*****************************************************************************************************************
