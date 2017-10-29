@@ -53,3 +53,6 @@ Debug
 *.atsln
 *.componentinfo.xml
 *.cppproj
+
+# vscode configuration directories
+.vscode
