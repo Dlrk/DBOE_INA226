@@ -35,8 +35,8 @@ INA226_Class::~INA226_Class() {}                                               /
 /*******************************************************************************************************************
 ** Method begin() sets the INA226 Configuration details, If no details a single device (ebay special) is assumed  **
 *******************************************************************************************************************/
-void INA226_Class::begin(uint8_t MAXmilliAmps,                                 // Max expected milliamps
-                         uint32_t CurrentSenseR,                               // Current Sense in microOhms
+void INA226_Class::begin(uint32_t MAXmilliAmps,                                 // Max expected milliamps
+                         uint32_t SenseRes,                                    // Sense Resistor in microOhms
                          uint8_t UNIT_ID,                                      // INA226 Unit number
                          uint8_t I2C_ADDR) {                                   // INA226 I2C Address
   Wire.begin();                                                                // Start the I2C wire subsystem
@@ -46,11 +46,10 @@ void INA226_Class::begin(uint8_t MAXmilliAmps,                                 /
     delayMicroseconds(I2C_RESET_DELAY);                                        // Wait for INA to finish resetting
     if (inaReadWord(INA_CONFIG_REG,I2C_ADDR)==INA_DEFAULT_CONFIG) {            // Yes, we've found a INA226!
       inaARRAY[UNIT_ID].address = I2C_ADDR;                                    // Store device address
-      inaARRAY[UNIT_ID].current_LSB =  (uint64_t)MAXmilliAmps*1000000/32767;   // Get the best possible LSB in nA
-      inaARRAY[UNIT_ID].calibration = (uint64_t)51200000 /                     // Compute calibration register
-        ((uint64_t)inaARRAY[UNIT_ID].current_LSB *
-        (uint64_t)CurrentSenseR / (uint64_t)100000);
-      inaARRAY[UNIT_ID].power_LSB = inaARRAY[UNIT_ID].current_LSB * 25;        // Fixed multiplier for INA226
+      inaARRAY[UNIT_ID].current_LSB = (uint32_t)MAXmilliAmps*1000000/32768;    // Calc current_LSB register
+      inaARRAY[UNIT_ID].calibration = (uint32_t)51200000 /                     // Calc calibration register
+      (((uint32_t)inaARRAY[UNIT_ID].current_LSB * (uint32_t)SenseRes) / (uint64_t)100000);
+      inaARRAY[UNIT_ID].power_LSB = (uint32_t)25*inaARRAY[UNIT_ID].current_LSB;// Fixed multiplier for INA226
       inaARRAY[UNIT_ID].operatingMode = B111;                                  // Default to continuous mode
       inaWriteWord(INA_CALIBRATION_REG,inaARRAY[UNIT_ID].calibration,          // Write the calibration value
                 inaARRAY[UNIT_ID].address);                                    // INA226 I2C Address
@@ -156,12 +155,39 @@ int32_t INA226_Class::getBusMicroWatts(uint8_t UNIT_ID) {
 } // END of method getBusMicroWatts()
 
 /*******************************************************************************************************************
-** Method reset resets the INA226 using the first bit in the configuration register                               **
+** Method to return the I2C Address value from inaSTRUCT for a given INA226 by UNIT_ID                                      **
 *******************************************************************************************************************/
-void INA226_Class::reset(uint8_t UNIT_ID) {                                    // Reset the INA226
-  inaWriteWord(INA_CONFIG_REG,0x8000,inaARRAY[UNIT_ID].address);               // Set most significant bit
-  delayMicroseconds(I2C_RESET_DELAY);                                          // Let the INA226
-} // END of method reset
+uint8_t INA226_Class::getAddress(uint8_t UNIT_ID) {
+  return(inaARRAY[UNIT_ID].address);                                       // return I2C Address
+} // END of method getAddress
+
+/*******************************************************************************************************************
+** Method to return the calibration value from inaSTRUCT for a given INA226 by UNIT_ID                                      **
+*******************************************************************************************************************/
+uint16_t INA226_Class::getCalibration(uint8_t UNIT_ID) {
+  return(inaARRAY[UNIT_ID].calibration);                                       // return calibration value
+} // END of method getCalibration
+
+/*******************************************************************************************************************
+** Method to return the current_LSB value from inaSTRUCT for a given INA226 by UNIT_ID                                      **
+*******************************************************************************************************************/
+uint32_t INA226_Class::getCurrentLSB(uint8_t UNIT_ID) {
+  return(inaARRAY[UNIT_ID].current_LSB);                                       // return current_LSB value
+} // END of method getCurrentLSB
+
+/*******************************************************************************************************************
+** Method to return the power_LSB value from inaSTRUCT for a given INA226 by UNIT_ID                                      **
+*******************************************************************************************************************/
+uint32_t INA226_Class::getPowerLSB(uint8_t UNIT_ID) {
+  return(inaARRAY[UNIT_ID].power_LSB);                                         // return power_LSB value
+} // END of method getPowerLSB
+
+/*******************************************************************************************************************
+** Method the operatingMode value from inaSTRUCT for a given INA226 by UNIT_ID                                      **
+*******************************************************************************************************************/
+uint8_t INA226_Class::getOperatingMode(uint8_t UNIT_ID) {
+  return(inaARRAY[UNIT_ID].operatingMode);                                     // return calibration value
+} // END of method getOperatingMode
 
 /*******************************************************************************************************************
 ** Method setMode allows the various mode combinations to be set. If no parameter is given the system goes back   **
@@ -241,3 +267,11 @@ void INA226_Class::setAlertPinOnConversion(bool alertState,uint8_t UNIT_ID ) { /
   else alertRegister |= (uint16_t)(1<<10);                                     // turn on the alert bit
   inaWriteWord(INA_MASK_ENABLE_REG,alertRegister,inaARRAY[UNIT_ID].address);   // Write register back to device
 } // END of method setAlertPinOnConversion
+
+/*******************************************************************************************************************
+** Method reset resets the INA226 using the first bit in the configuration register                               **
+*******************************************************************************************************************/
+void INA226_Class::reset(uint8_t UNIT_ID) {                                    // Reset the INA226
+  inaWriteWord(INA_CONFIG_REG,0x8000,inaARRAY[UNIT_ID].address);               // Set most significant bit
+  delayMicroseconds(I2C_RESET_DELAY);                                          // Let the INA226
+} // END of method reset
