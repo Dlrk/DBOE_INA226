@@ -33,7 +33,8 @@
                 "/usr/include/x86_64-linux-gnu",
                 "/usr/include/newlib",
                 "/usr/include",
-                "${workspaceRoot}"
+                "${workspaceRoot}",
+                "/home/dave/arduino/hardware/arduino/avr/cores/arduino"
             ],
             "defines": [],
             "intelliSenseMode": "clang-x64",
@@ -46,9 +47,10 @@
                     "/usr/include/x86_64-linux-gnu",
                     "/usr/include/newlib",
                     "/usr/include",
-                    "${workspaceRoot}"
+                    "${workspaceRoot}",
+                    "/home/dave/arduino/hardware/arduino/avr/cores/arduino"
                 ],
-                "limitSymbolsToIncludedHeaders": true,
+                "limitSymbolsToIncludedHeaders": false,
                 "databaseFilename": ""
             }
         },
