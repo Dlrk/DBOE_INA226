@@ -37,7 +37,8 @@
                 "/home/dave/arduino/hardware/arduino/avr/cores/arduino",
                 "/home/dave/arduino/hardware/arduino/avr/libraries/Wire/src",
                 "/home/dave/arduino/hardware/arduino/avr/libraries/SPI/src",
-                "/home/dave/arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include"
+                "/home/dave/arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include",
+                "/home/dave/arduino/hardware/tools/avr/avr/include/avr"
             ],
             "defines": [],
             "intelliSenseMode": "clang-x64",
@@ -54,7 +55,8 @@
                     "/home/dave/arduino/hardware/arduino/avr/cores/arduino",
                     "/home/dave/arduino/hardware/arduino/avr/libraries/Wire/src",
                     "/home/dave/arduino/hardware/arduino/avr/libraries/SPI/src",
-                    "/home/dave/arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include"
+                    "/home/dave/arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include",
+                    "/home/dave/arduino/hardware/tools/avr/avr/include/avr"
                 ],
                 "limitSymbolsToIncludedHeaders": false,
                 "databaseFilename": ""
